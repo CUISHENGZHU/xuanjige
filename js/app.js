@@ -122,7 +122,44 @@
       '<div class="kv"><span>体（' + g.ti + '·' + tInfo[g.ti].wx + '）对用（' + g.yong + '·' + tInfo[g.yong].wx + '）：<b>' + j.head + '</b></span></div>' +
       '<div class="note">体卦为己、为主、为静；用卦为事、为客、为动。体宜旺不宜衰，宜受生不宜受克。互卦看过程，变卦看结局。若互、变皆生体，纵用克体亦凶中带吉；若体旺而用衰，虽体克用亦费力成事。</div></div>';
 
+    out += yiCardsHTML(g.name, g.lines, [g.dong]);
     $('mhOut').innerHTML = out;
+  }
+
+  /* ---------- 高岛易断 / 曾仕强 ---------- */
+  function sanCaiLine(movings) {
+    if (!movings || !movings.length) return '六爻皆静，天地人三才俱安，宜守常待时。';
+    return movings.map(function (p) {
+      var c = p <= 2 ? '地位（根基、基层、身体）' : p <= 4 ? '人位（人事、执行、己身）' : '天位（大势、上级、方向）';
+      return '第' + p + '爻属' + c;
+    }).join('；') + '。';
+  }
+
+  function yiCardsHTML(name, lines, movings) {
+    var a = YiDuan.analyze(name, lines, movings || []);
+    var h = '<div class="card"><h3>高岛易断</h3><ul class="tips">';
+    h += '<li><span class="k">气运</span><span class="v">' + a.xiang + '</span></li>';
+    h += '<li><span class="k">占事</span><span class="v">' + a.shi + '</span></li>';
+    h += '<li><span class="k">要爻</span><span class="v">' + a.ji + '<br><span style="color:#9b8f79">（此卦关键之爻，可与下所列动爻参看）</span></span></li>';
+    if (a.xiaoxi) h += '<li><span class="k">消息卦</span><span class="v">此卦为十二消息卦之「' + a.xiaoxi + '」，以阴阳消长言气运之进退。</span></li>';
+    if (a.wei.length) {
+      a.wei.forEach(function (w) {
+        var cls = w.tone.indexOf('凶') >= 0 ? 'xiong' : w.tone.indexOf('吉') >= 0 ? 'ji' : 'ping';
+        h += '<li><span class="k">' + w.title + '</span><span class="v"><b class="' + cls + '">' + w.tone + '</b>　' + w.text +
+          '<br><span style="color:#9b8f79">' + w.tip + '</span></span></li>';
+      });
+    } else {
+      h += '<li><span class="k">静卦</span><span class="v">六爻安静，以本卦卦辞与大象为断，观气运升降而不观其变。</span></li>';
+    }
+    h += '</ul><div class="note">高岛吞象（1832—1914）《高岛易断》以《周易》本经为准，逐卦逐爻为断，最重「当位、得中、相应」与所问之事是否相称；其法揲蓍取卦，今多以铜钱代之，与本器摇卦同源。此处按其体例整理，非原书原文。</div></div>';
+
+    if (a.zeng) {
+      h += '<div class="card"><h3>曾仕强 · 卦中智慧</h3>' +
+        '<div class="verdict" style="padding:10px"><div class="lv" style="font-size:19px;letter-spacing:2px">' + a.zeng[0] + '</div></div>' +
+        '<div class="guaci">' + a.zeng[1] + '</div>' +
+        '<div class="note">曾仕强讲《易经》，重在「讲道理」而非「算命」：卦象提示的是一种处境与分寸，路怎么走仍在自己。他常提三才之道——初二为地、三四为人、五上为天。本卦' + sanCaiLine(movings) + '</div></div>';
+    }
+    return h;
   }
 
   /* ---------- 六爻 ---------- */
@@ -192,6 +229,7 @@
     out += '<div class="guaci"><em>象意：</em>' + bg[1] + '</div></div>';
 
     out += '<div class="card"><h3>断卦提示</h3>' + tipsHTML(pan.tips) + '</div>';
+    out += yiCardsHTML(pan.benName, pan.lines, pan.movings);
     $('lyOut').innerHTML = out;
   }
 
