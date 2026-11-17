@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>玄机阁 · 梅花易数 / 六爻 / 奇门遁甲 / 八字 / 小六壬</title>
+<meta name="description" content="在线排盘：梅花易数时间起卦与体用生克、六爻纳甲装卦、时家奇门遁甲转盘、四柱八字十神旺衰、小六壬，附各派详解。">
+<meta name="theme-color" content="#0d0b09">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23110e0a'/><text x='16' y='23' font-size='20' text-anchor='middle' fill='%23c9a457' font-family='serif'>卦</text></svg>">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <h1>玄<span>机</span>阁</h1>
+    <div class="sub">梅 花 易 数 · 六 爻 纳 甲 · 奇 门 遁 甲 · 四 柱 八 字 · 小 六 壬</div>
+  </header>
+
+  <div class="bar">
+    <label>起课时刻</label>
+    <input type="datetime-local" id="when" step="60">
+    <button class="btn sm ghost" id="nowBtn">此刻</button>
+    <div class="lunar-info" id="lunarInfo"></div>
+  </div>
+
+  <nav class="tabs" id="tabs">
+    <button data-tab="meihua" class="on">梅花易数</button>
+    <button data-tab="liuyao">六爻</button>
+    <button data-tab="qimen">奇门遁甲</button>
+    <button data-tab="bazi">四柱八字</button>
+    <button data-tab="xlr">小六壬</button>
+    <button data-tab="doc">详解</button>
+  </nav>
+
+  <!-- ============ 梅花易数 ============ -->
+  <section class="panel on" id="p-meihua">
+    <div class="card">
+      <h3>起卦法</h3>
+      <div class="row">
+        <div class="seg" id="mhMode">
+          <button data-m="time" class="on">时间起卦</button>
+          <button data-m="num">数字起卦</button>
+          <button data-m="char">文字起卦</button>
+        </div>
+      </div>
+      <div class="row hidden" id="mhNumRow">
+        <label>上卦数</label><input type="number" id="mhA" value="8" style="width:76px">
+        <label>下卦数</label><input type="number" id="mhB" value="5" style="width:76px">
+      </div>
+      <div class="row hidden" id="mhCharRow">
+        <label>报字</label><input type="text" id="mhStr" placeholder="输入要占的文字，如「问财」" maxlength="16">
+      </div>
+      <div class="row">
+        <button class="btn" id="mhGo">起 卦</button>
+        <span class="note" style="margin:0">时间起卦用农历月日与时辰；数字起卦取两数分上下卦。</span>
+      </div>
+    </div>
+    <div id="mhOut"></div>
+  </section>
+
+  <!-- ============ 六爻 ============ -->
+  <section class="panel" id="p-liuyao">
+    <div class="card">
+      <h3>摇卦</h3>
+      <div class="row">
+        <label>所问</label>
+        <select id="lyTopic">
+          <option>求财生意</option><option>事业官职</option><option>考试学业</option>
+          <option>婚姻感情</option><option>健康疾病</option><option>失物寻人</option>
+          <option>官司诉讼</option><option>文书合同</option><option>子女晚辈</option>
+          <option>出行搬迁</option><option>一般问事</option>
+        </select>
+        <button class="btn sm red" id="lyShake">摇 卦</button>
+        <button class="btn sm ghost" id="lyClear">清空</button>
+      </div>
+      <div id="lyManual" style="display:flex;flex-direction:column;gap:5px"></div>
+      <div class="row" style="margin-top:10px">
+        <button class="btn" id="lyGo">排 卦</button>
+        <span class="note" style="margin:0">三枚铜钱掷六次，自初爻至上爻。三背为老阳、三字为老阴（皆动）。</span>
+      </div>
+    </div>
+    <div id="lyOut"></div>
+  </section>
+
+  <!-- ============ 奇门遁甲 ============ -->
+  <section class="panel" id="p-qimen">
+    <div class="card">
+      <h3>起局</h3>
+      <div class="row">
+        <label>用神</label>
+        <select id="qmTopic">
+          <option>一般问事</option><option>求财生意</option><option>事业官职</option>
+          <option>婚姻感情</option><option>考试学业</option><option>健康疾病</option>
+          <option>官司诉讼</option><option>出行搬迁</option><option>失物寻人</option>
+          <option>文书合同</option><option>田土房产</option>
+        </select>
+        <button class="btn" id="qmGo">排 盘</button>
+      </div>
+      <div class="note">时家奇门 · 转盘 · 拆补法定局。按上方时刻起局，以所问之事取用神，观其落宫之旺衰生克。</div>
+    </div>
+    <div id="qmOut"></div>
+  </section>
+
+  <!-- ============ 四柱八字 ============ -->
+  <section class="panel" id="p-bazi">
+    <div class="card">
+      <h3>排盘</h3>
+      <div class="row">
+        <label>性别</label>
+        <div class="seg" id="bzSex">
+          <button data-s="男" class="on">男</button>
+          <button data-s="女">女</button>
+        </div>
+        <button class="btn" id="bzGo">排 盘</button>
+        <span class="note" style="margin:0">以节气定月柱、立春换年柱；日柱以子正换日。</span>
+      </div>
+    </div>
+    <div id="bzOut"></div>
+  </section>
+
+  <!-- ============ 小六壬 ============ -->
+  <section class="panel" id="p-xlr">
+    <div class="card">
+      <h3>起课</h3>
+      <div class="row">
+        <label>农历月</label><input type="number" id="xlM" min="1" max="12" value="1" style="width:64px">
+        <label>日</label><input type="number" id="xlD" min="1" max="30" value="1" style="width:64px">
+        <label>时辰</label>
+        <select id="xlH"></select>
+        <button class="btn" id="xlGo">起 课</button>
+      </div>
+      <div class="note">小六壬以大安、留连、速喜、赤口、小吉、空亡六位轮转，月、日、时三次起课，末位定吉凶。最宜问眼前急事。</div>
+    </div>
+    <div id="xlOut"></div>
+  </section>
+
+  <!-- ============ 详解 ============ -->
+  <section class="panel doc" id="p-doc">
+    <div class="card">
+      <h3>八卦与五行</h3>
+      <p><span class="hl">先天八卦数</span>：乾一、兑二、离三、震四、巽五、坎六、艮七、坤八。此数用于起卦取象，凡「数字起卦」皆以此为据，余零者按八算（坤）。</p>
+      <p><span class="hl">后天方位</span>：坎北、艮东北、震东、巽东南、离南、坤西南、兑西、乾西北。奇门九宫即用此方位。</p>
+      <p><span class="hl">五行生克</span>：木生火、火生土、土生金、金生水、水生木；木克土、土克水、水克火、火克金、金克木。生我者为父母，我生者为子孙，克我者为官鬼，我克者为妻财，同我者为兄弟——此即「六亲」之源。</p>
+      <p><span class="hl">旺相休囚死</span>：当令者旺、我生者相、生我者休、克我者囚、我克者死。同一卦同一爻，在不同的月令里力有大小，故断卦须先看时令。</p>
+    </div>
+
+    <div class="card">
+      <h3>一、梅花易数</h3>
+      <p>宋邵雍（康节）所传。以「数」起卦，以「象」言事，不讲纳甲、不用六神，最简易也最考验悟性。</p>
+      <h4>起卦</h4>
+      <ul>
+        <li><b>时间起卦</b>：年支数 + 农历月 + 农历日，和除以八，余数取上卦；再加时支数，和除以八，余数取下卦；总数除以六，余数为动爻（余零作六）。</li>
+        <li><b>数字起卦</b>：两数分别除八定上下卦，两数之和除六定动爻。</li>
+        <li><b>文字起卦</b>：字数为卦，或按字之笔画、字数分上下。本器以字码之和代为笔画，取其象数。</li>
+      </ul>
+      <h4>体用</h4>
+      <p>动爻所在的卦为「用」，另一卦为「体」。体为己、为主、为静；用为事、为客、为动。<span class="hl">断卦的核心就是看用卦对体卦的生克</span>：</p>
+      <ul>
+        <li><b>用生体</b>：大吉。事来就我，不劳而获，多得贵人。</li>
+        <li><b>体克用</b>：小吉。我可制事，但须费力争取。</li>
+        <li><b>体用比和</b>：吉。同气相求，事顺人和。</li>
+        <li><b>体生用</b>：耗损。我生事，费力耗财，成而不得实利。</li>
+        <li><b>用克体</b>：凶。事来克我，阻力大，勉强求之必受伤。</li>
+      </ul>
+      <h4>互卦与变卦</h4>
+      <p><b>互卦</b>取本卦的二三四爻为下卦、三四五爻为上卦，主事情发展的过程与内情；<b>变卦</b>为动爻阴阳相易所得，主事情的最终结局。三者合看：体用定吉凶之基调，互卦看中途，变卦看收尾。</p>
+      <h4>应期</h4>
+      <p>梅花断应期，多用卦气与卦数：以体卦五行的旺月、或用卦之数（如乾一兑二）为期限；亦看动爻在初、二、三、四、五、上，分别应于近、渐、中、远、更远、极远之时。</p>
+      <p class="q">注：梅花贵在一念之机，同一事不可反复起卦，占则诚、诚则灵，此为古人「初筮告，再三渎」之意。</p>
+    </div>
+
+    <div class="card">
+      <h3>二、六爻纳甲</h3>
+      <p>汉京房所创，以铜钱摇卦，按八宫纳甲装卦，是目前流传最广、体系最严密的卜筮法。</p>
+      <h4>摇卦</h4>
+      <ul>
+        <li>三枚铜钱合于掌中，凝神默想所问之事，摇而掷之，记其背数，凡六次，自下而上成六爻。</li>
+        <li>一背两字为<b>少阳</b>（阳，静）；两背一字为<b>少阴</b>（阴，静）；三背为<b>老阳</b>（阳动，变阴）；三字为<b>老阴</b>（阴动，变阳）。</li>
+      </ul>
+      <h4>装卦六事</h4>
+      <ul>
+        <li><b>八宫</b>：每宫八卦（本宫、一世至五世、游魂、归魂），宫有五行，即「我」之所在。</li>
+        <li><b>纳甲</b>：为六爻各配干支，乾纳甲壬、坤纳乙癸、震庚、巽辛、坎戊、离己、艮丙、兑丁。</li>
+        <li><b>六亲</b>：以宫五行与我论生克，定父母、兄弟、子孙、妻财、官鬼。</li>
+        <li><b>六神</b>：按日干起青龙、朱雀、勾陈、螣蛇、白虎、玄武，自初爻顺排。</li>
+        <li><b>世应</b>：世为己、应为彼，隔三位相对。</li>
+        <li><b>旬空</b>：按日辰所在旬定空亡二支，空则虚、出空则应。</li>
+      </ul>
+      <h4>断卦</h4>
+      <p>第一步<span class="hl">取用神</span>：问财看妻财、问官问事业看官鬼、问文书房产看父母、问子女看子孙、问兄弟朋友看兄弟；不知何属则看世爻。第二步看用神在月建、日辰下的旺衰与被生被克。第三步看动爻：动必有变，动爻生用神则吉、克用神则凶，动而化回头生克尤重。第四步看变卦定终局。</p>
+      <p class="q">六爻最重「日月为纲」：月建定旺衰，日辰定生杀，卦中之爻再强也强不过日月。</p>
+    </div>
+
+    <div class="card">
+      <h3>三、奇门遁甲</h3>
+      <p>古称「帝王之学」，相传出黄帝战蚩尤时。以九宫为盘、三奇六仪为兵、八门为门户、九星为天时、八神为神煞，用以推演时空之势，最宜择时、择方、断事之成败。</p>
+      <h4>定局</h4>
+      <ul>
+        <li>先看节气：冬至后至芒种为<b>阳遁</b>（气机生发，宜进取），夏至后至大雪为<b>阴遁</b>（气机收敛，宜守静）。</li>
+        <li>再定三元：以符头（最近之甲日或己日）地支为准，子午卯酉为上元、寅申巳亥为中元、辰戌丑未为下元。</li>
+        <li>节气加三元查表得出局数，本器用<b>拆补法</b>，与置闰法所得偶有差异，属流派之别。</li>
+      </ul>
+      <h4>布盘</h4>
+      <ul>
+        <li><b>地盘</b>：阳遁自局数宫起顺布戊己庚辛壬癸丁丙乙（三奇六仪），阴遁逆布。</li>
+        <li><b>天盘</b>：以时柱所在旬的旬首仪为值符，值符加于时干所落之宫，其余八星整体随之旋转（转盘）。</li>
+        <li><b>八门</b>：旬首所在宫之门为值使，自值符宫起顺（阳）逆（阴）数至时辰，即为值使落宫，八门随之而转。</li>
+        <li><b>八神</b>：值符、腾蛇、太阴、六合、白虎、玄武、九地、九天，阳遁顺布、阴遁逆布。</li>
+        <li><b>格局</b>：天盘干加地盘干成「十干克应」，如戊加丙为青龙返首（大吉）、庚加庚为太白同宫（大凶）。</li>
+      </ul>
+      <h4>读盘</h4>
+      <p>先以所问之事定用神（求财看生门、事业看开门、婚姻看六合、文书看景门、疾病看天芮、考试看天辅），看用神落于何宫、该宫之门星神格如何、是否逢空、是否临马星。用神吉则事成，用神落空受克则事阻。<b>日干为己、时干为事</b>，两宫生克可见我与事之向背。</p>
+      <p class="q">本器所排为时家奇门转盘，中五宫寄坤二宫。奇门流派众多（转盘/飞盘、拆补/置闰、时家/日家），所得局数与某家软件不同，先看其定局法是否一致，再论吉凶。</p>
+    </div>
+
+    <div class="card">
+      <h3>四、四柱八字</h3>
+      <p>以出生之年月日时配天干地支，四柱八字，看五行之偏全、日主之旺衰，定一生之格局与岁运之吉凶。</p>
+      <ul>
+        <li><b>排柱</b>：年柱以立春换年，月柱以节气换月（非农历初一），日柱以子正换日，时柱用五鼠遁由日干推得。</li>
+        <li><b>十神</b>：以日干为我，生我者印（正印/偏印）、我生者食伤、克我者官杀、我克者财、同我者比劫，再分阴阳正偏。</li>
+        <li><b>旺衰</b>：看日主在月令得令与否、四支通根与否、天干生扶与否。得令得地得生为强，反之为弱。</li>
+        <li><b>喜忌</b>：身强喜财官食伤（克泄耗），身弱喜印比（生扶）。真正的用神还须看调候（寒暖燥湿）与格局。</li>
+        <li><b>大运</b>：阳男阴女顺行、阴男阳女逆行，自月柱起排，十年一运。</li>
+      </ul>
+      <p class="q">本器的旺衰为按月令加权计分的速算法，可作入门参照。命理之精微在于格局高低、流通有情、调候得宜，非分数可尽，请勿据此论断他人命运。</p>
+    </div>
+
+    <div class="card">
+      <h3>五、小六壬</h3>
+      <p>民间最流行的小法，出于六壬神课而极简。六位依次：</p>
+      <p><span class="tag">大安·木·吉</span><span class="tag">留连·土·凶</span><span class="tag">速喜·火·吉</span><span class="tag">赤口·金·凶</span><span class="tag">小吉·水·小吉</span><span class="tag">空亡·土·大凶</span></p>
+      <p>起法：从大安起数农历月，落位再起数农历日，再起数时辰，末位即是结果。最宜问眼前之事、寻人寻物、当日吉凶；不宜问长远大事。</p>
+    </div>
+
+    <div class="card">
+      <h3>六、占卜的分寸</h3>
+      <ul>
+        <li><b>不疑不占</b>：无疑而占，是戏侮；事已决定而占，是求安慰。皆不灵。</li>
+        <li><b>一事一占</b>：同一事反复起卦，卦象自乱。初筮为准，再筮则渎。</li>
+        <li><b>占断为参考，不为命令</b>：卦示趋势与阻点，不代人做决定。杀伐决断，终究在人。</li>
+        <li><b>不占生死、不占人隐私、不代人占其不愿被占之事</b>：此为术者之德。</li>
+      </ul>
+      <p class="q">本器所有推演均在本地浏览器中完成，不上传任何数据。算法依传统排盘规则编写，各流派细节（定局法、换日法、纳甲法）或有不同，仅供研习与参考，请勿用于医疗、投资、法律等重大决策。</p>
+    </div>
+  </section>
+
+  <footer>
+    玄机阁 · 本地排盘，数据不出本机<br>
+    算法参考：京房纳甲、邵子梅花、时家奇门拆补法、子平四柱　|　农历与节气由 lunar-javascript 支持
+  </footer>
+</div>
+
+<script src="js/lunar.js"></script>
+<script src="js/hex.js"></script>
+<script src="js/meihua.js"></script>
+<script src="js/liuyao.js"></script>
+<script src="js/qimen.js"></script>
+<script src="js/bazi.js"></script>
+<script src="js/xiaoliuren.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
