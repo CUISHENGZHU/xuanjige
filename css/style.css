@@ -263,3 +263,11 @@ footer a { color: #6b6252; }
 
 .hidden { display: none !important; }
 .note { font-size: 12px; color: var(--muted); margin-top: 8px; line-height: 1.7; }
+
+/* 顶部跳转链接（教学页） */
+.top-link { text-align: right; margin: -4px 0 12px; }
+.top-link a {
+  color: var(--gold); text-decoration: none; font-size: 12px; letter-spacing: 2px;
+  border: 1px solid rgba(201,164,87,.35); border-radius: 3px; padding: 6px 11px;
+}
+.top-link a:active { background: rgba(201,164,87,.12); }

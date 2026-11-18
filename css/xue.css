@@ -1,0 +1,240 @@
+/* ===== 六十四卦 · 教学页样式 ===== */
+.wrap.xue { max-width: 880px; }
+
+/* 卦象线条 */
+.hx { display: inline-flex; flex-direction: column; gap: 2px; align-items: center; }
+.hx .ln { display: flex; gap: 4px; }
+.hx .ln.n { gap: 5px; }
+.hx .ln i { display: block; height: 3px; background: var(--ink); border-radius: 1px; }
+.hx .ln.y i { width: 24px; }
+.hx .ln.n i { width: 10px; }
+.hx.sm .ln i { height: 3px; }
+.hx.sm .ln.y i { width: 22px; }
+.hx.sm .ln.n i { width: 9px; }
+.hx.sm .ln.n { gap: 4px; }
+.hx.md { gap: 3px; }
+.hx.md .ln i { height: 5px; }
+.hx.md .ln.y i { width: 40px; }
+.hx.md .ln.n i { width: 17px; }
+.hx.md .ln.n { gap: 6px; }
+.hx.xl { gap: 5px; }
+.hx.xl .ln i { height: 8px; }
+.hx.xl .ln.y i { width: 78px; }
+.hx.xl .ln.n i { width: 35px; }
+.hx.xl .ln.n { gap: 8px; }
+.hx.tri .ln i { height: 4px; }
+.hx.tri .ln.y i { width: 26px; }
+.hx.tri .ln.n i { width: 11px; }
+.hx.tri .ln.n { gap: 4px; }
+
+/* 顶部标签 */
+.xtabs { display: flex; gap: 4px; border-bottom: 1px solid var(--line); margin: 0 0 16px; overflow-x: auto; }
+.xtabs button {
+  flex: 0 0 auto; background: none; border: none; color: var(--muted); font: inherit;
+  padding: 10px 12px 9px; letter-spacing: 2px; font-size: 13px; cursor: pointer; position: relative;
+}
+.xtabs button.on { color: var(--gold2); }
+.xtabs button.on::after {
+  content: ""; position: absolute; left: 8px; right: 8px; bottom: -1px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.hint { color: var(--muted); font-size: 12px; line-height: 1.9; letter-spacing: .5px; }
+.xh { margin: 26px 0 12px; font-size: 14px; letter-spacing: 3px; color: var(--gold); font-weight: 500; }
+.xh small { color: var(--muted); letter-spacing: 1px; font-weight: 400; }
+
+/* 进度条 */
+.xbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 12px; }
+.prog { flex: 1 1 180px; }
+.prog-t { font-size: 12px; color: var(--muted); letter-spacing: 1px; margin-bottom: 5px; }
+.prog-t b { color: var(--gold2); font-weight: 500; }
+.prog-bar { height: 3px; background: #221c14; border-radius: 2px; overflow: hidden; }
+.prog-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--red), var(--gold)); }
+.xsearch {
+  flex: 1 1 200px; background: #0a0908; color: var(--ink); border: 1px solid var(--line2);
+  border-radius: 4px; padding: 9px 11px; font: inherit; font-size: 13px;
+}
+
+/* 64 宫格 */
+.grid64 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.g64 {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  padding: 12px 4px 10px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 5px; text-decoration: none; color: var(--ink); position: relative;
+}
+.g64 .no { position: absolute; top: 5px; left: 7px; font-size: 9px; color: #5c5241; letter-spacing: 0; }
+.g64 .nm { font-size: 12px; letter-spacing: 1px; color: var(--muted); }
+.g64.on { border-color: rgba(201,164,87,.55); background: rgba(201,164,87,.07); }
+.g64.on .nm { color: var(--gold2); }
+
+/* 八卦速记 */
+.jing { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.jcard { background: var(--panel); border: 1px solid var(--line); border-radius: 5px; padding: 10px 6px; text-align: center; }
+.jcard .jsym { margin-bottom: 6px; display: flex; justify-content: center; }
+.jcard .jname { font-size: 14px; color: var(--gold); letter-spacing: 1px; }
+.jcard .jname span { color: var(--muted); font-size: 12px; }
+.jcard .jjue { font-size: 11px; color: var(--ink); margin-top: 5px; letter-spacing: 1px; }
+.jcard .jmeta { font-size: 10px; color: #6d6350; margin-top: 3px; }
+
+/* 8×8 组合表 */
+.tbl-wrap { overflow-x: auto; }
+table.x8x8 { border-collapse: collapse; margin: 0 auto; }
+table.x8x8 th {
+  font-size: 12px; color: var(--gold); font-weight: 500; padding: 6px; letter-spacing: 1px;
+}
+table.x8x8 td { border: 1px solid var(--line); }
+table.x8x8 td a {
+  display: block; padding: 9px 8px; color: var(--ink); text-decoration: none;
+  font-size: 12px; letter-spacing: 1px; min-width: 44px; text-align: center;
+}
+table.x8x8 td a:active { background: rgba(201,164,87,.15); }
+
+/* 八宫 */
+.palaces { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+.pc { background: var(--panel); border: 1px solid var(--line); border-radius: 5px; padding: 9px 11px; }
+.pc-t { font-size: 12px; color: var(--gold); letter-spacing: 2px; margin-bottom: 5px; }
+.pc-l { font-size: 12px; line-height: 2; color: var(--muted); }
+.pc-l a { color: var(--ink); text-decoration: none; }
+.pc-l a:active { color: var(--gold2); }
+
+/* 卦序歌 */
+.songline { border-left: 2px solid var(--line2); padding: 2px 0 2px 12px; margin-bottom: 18px; }
+.songline .sl { font-size: 15px; letter-spacing: 2px; color: var(--gold2); line-height: 2; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
+.chip {
+  font-size: 11px; color: var(--muted); text-decoration: none;
+  border: 1px solid var(--line); border-radius: 3px; padding: 3px 7px; letter-spacing: 1px;
+}
+.chip:active { color: var(--gold2); border-color: var(--line2); }
+.tips { background: var(--panel); border: 1px solid var(--line); border-radius: 5px; padding: 6px 14px; }
+.tips p { font-size: 13px; line-height: 2; color: #cfc5b1; margin: 8px 0; }
+.tips b { color: var(--gold); font-weight: 500; }
+
+/* 自测 */
+.seg.qmode { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
+.seg.qmode button {
+  background: #14110d; border: 1px solid var(--line2); color: var(--muted); font: inherit;
+  font-size: 12px; padding: 7px 11px; border-radius: 4px; letter-spacing: 1px; cursor: pointer;
+}
+.seg.qmode button.on { color: var(--gold2); border-color: var(--gold); }
+.qstat { font-size: 12px; color: var(--muted); letter-spacing: 1px; margin-bottom: 12px; }
+.qstat b { color: var(--gold2); font-weight: 500; }
+.qcard { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 22px 16px; }
+.qq { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 14px; }
+.qname { font-size: 26px; letter-spacing: 5px; color: var(--gold2); }
+.qci { font-size: 15px; line-height: 2; color: var(--ink); text-align: center; max-width: 520px; }
+.qask { text-align: center; font-size: 12px; color: var(--muted); letter-spacing: 3px; margin-bottom: 14px; }
+.qopts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.qopt {
+  background: #14110d; border: 1px solid var(--line2); color: var(--ink); font: inherit;
+  font-size: 14px; letter-spacing: 2px; padding: 14px 8px; border-radius: 5px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 58px;
+}
+.qopt.yes { border-color: var(--green); background: rgba(111,154,104,.15); color: #a8c9a2; }
+.qopt.no { border-color: var(--red); background: rgba(184,71,60,.13); color: #d99a92; }
+.qres { margin-top: 14px; font-size: 13px; color: var(--muted); text-align: center; letter-spacing: 1px; }
+.qres a { color: var(--gold2); }
+.qnext {
+  margin-left: 8px; background: none; border: 1px solid var(--line2); color: var(--gold2);
+  font: inherit; font-size: 12px; padding: 5px 10px; border-radius: 3px; cursor: pointer;
+}
+
+/* 详情 */
+.dhead { display: flex; gap: 18px; align-items: center; padding: 6px 0 18px; border-bottom: 1px solid var(--line); }
+.bigsym { flex: 0 0 auto; padding: 4px; }
+.dn { font-size: 26px; letter-spacing: 6px; color: var(--gold2); }
+.dno { font-size: 11px; color: var(--muted); letter-spacing: 2px; margin-top: 6px; }
+.dtri { font-size: 11px; color: #8d8168; letter-spacing: 1px; margin-top: 5px; }
+.dcard { background: var(--panel); border: 1px solid var(--line); border-radius: 5px; padding: 14px 16px; margin-top: 12px; }
+.dcard h4 {
+  margin: 0 0 10px; font-size: 12px; letter-spacing: 3px; color: var(--gold); font-weight: 500;
+}
+.dcard h4::before { content: ""; width: 3px; height: 12px; background: var(--red); display: inline-block; margin-right: 7px; vertical-align: -1px; }
+.dcard p { margin: 7px 0; font-size: 14px; line-height: 2; color: #ddd4c3; }
+.dcard p.src { color: var(--gold2); font-size: 14px; letter-spacing: 1px; line-height: 1.9; }
+.dcard p.ji { color: var(--ink); font-size: 15px; letter-spacing: 1px; }
+.dcard p.kw { color: var(--gold2); font-size: 15px; letter-spacing: 1px; }
+.dcard .pt { border-left: 2px solid var(--red); padding-left: 10px; color: #cfc5b1; font-size: 13px; }
+.dcard .pt span { color: var(--red); font-size: 11px; letter-spacing: 2px; margin-right: 6px; }
+.dcard p .lab {
+  display: inline-block; width: 34px; color: var(--gold); font-size: 11px; letter-spacing: 1px;
+}
+.dcard.zeng { border-left: 2px solid rgba(111,154,104,.5); }
+.dcard.taka { border-left: 2px solid rgba(201,164,87,.5); }
+
+/* 六爻位 */
+.yaorows { display: flex; flex-direction: column; gap: 2px; }
+.yrow {
+  display: grid; grid-template-columns: 34px 56px 40px 1fr; gap: 8px; align-items: center;
+  padding: 7px 6px; border-radius: 4px; text-decoration: none; color: var(--ink);
+  border: 1px solid transparent;
+}
+.yrow:nth-child(odd) { background: rgba(255,255,255,.018); }
+.yrow:active { border-color: var(--line2); }
+.ylab { font-size: 12px; color: var(--gold); letter-spacing: 1px; }
+.myao { display: block; width: 52px; height: 6px; background: var(--ink); border-radius: 1px; position: relative; }
+.myao.yin { background: transparent; }
+.myao.yin::before, .myao.yin::after {
+  content: ""; position: absolute; top: 0; height: 6px; width: 21px; background: var(--ink); border-radius: 1px;
+}
+.myao.yin::before { left: 0; }
+.myao.yin::after { right: 0; }
+.ytone { font-size: 10px; letter-spacing: 0; text-align: center; border-radius: 2px; padding: 2px 0; }
+.ytone.ji { color: #a8c9a2; background: rgba(111,154,104,.16); }
+.ytone.pj { color: #b7d0b2; background: rgba(111,154,104,.09); }
+.ytone.ping { color: #9b8f79; background: rgba(155,143,121,.1); }
+.ytone.px { color: #d4a09a; background: rgba(184,71,60,.1); }
+.ytone.xiong { color: #e09a92; background: rgba(184,71,60,.18); }
+.ytext { font-size: 11px; line-height: 1.72; color: #b3a894; letter-spacing: .2px; }
+.ybian { display: none; }
+
+/* 关系 */
+.rels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.rel {
+  display: flex; flex-direction: column; align-items: center; gap: 7px; padding: 12px 6px;
+  background: #14110d; border: 1px solid var(--line2); border-radius: 5px;
+  text-decoration: none; color: var(--ink);
+}
+.rel .rt { font-size: 11px; color: var(--gold); letter-spacing: 2px; }
+.rel .rn { font-size: 12px; color: var(--ink); letter-spacing: 1px; }
+.rel .rd { font-size: 10px; color: #6d6350; line-height: 1.6; text-align: center; }
+.bchip {
+  display: inline-block; margin: 4px 5px 0 0; padding: 4px 8px; font-size: 11px;
+  color: var(--muted); border: 1px solid var(--line); border-radius: 3px; text-decoration: none; letter-spacing: .5px;
+}
+.bchip:active { color: var(--gold2); }
+
+/* 操作条 */
+.dact { display: flex; gap: 8px; margin: 16px 0 30px; align-items: center; }
+.mk {
+  flex: 1; background: none; border: 1px solid var(--line2); color: var(--muted);
+  font: inherit; font-size: 13px; letter-spacing: 2px; padding: 11px; border-radius: 4px; cursor: pointer;
+}
+.mk.on { color: var(--gold2); border-color: var(--gold); background: rgba(201,164,87,.1); }
+.navbtn {
+  padding: 11px 12px; font-size: 12px; color: var(--muted); text-decoration: none;
+  border: 1px solid var(--line); border-radius: 4px; letter-spacing: 1px;
+}
+.navbtn:active { color: var(--gold2); }
+
+@media (min-width: 640px) {
+  .grid64 { grid-template-columns: repeat(4, 1fr); }
+  .jing { grid-template-columns: repeat(8, 1fr); }
+  .qopts { grid-template-columns: repeat(4, 1fr); }
+  .ybian { display: block; font-size: 10px; color: #6d6350; }
+  .yrow { grid-template-columns: 34px 56px 40px 1fr 70px; }
+}
+@media (max-width: 380px) {
+  .qopts { grid-template-columns: 1fr; }
+}
+
+/* 返回条 */
+.xback { margin: 0 0 10px; }
+.xback a { font-size: 12px; color: var(--muted); text-decoration: none; letter-spacing: 1px; }
+.xback a:active { color: var(--gold2); }
+
+/* 随手一卦 */
+.rand {
+  flex: 0 0 auto; background: none; border: 1px solid var(--line2); color: var(--gold2);
+  font: inherit; font-size: 12px; letter-spacing: 2px; padding: 9px 12px; border-radius: 4px; cursor: pointer;
+}
+.rand:active { background: rgba(201,164,87,.12); }
