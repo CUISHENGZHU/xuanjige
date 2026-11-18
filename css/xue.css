@@ -238,3 +238,32 @@ table.x8x8 td a:active { background: rgba(201,164,87,.15); }
   font: inherit; font-size: 12px; letter-spacing: 2px; padding: 9px 12px; border-radius: 4px; cursor: pointer;
 }
 .rand:active { background: rgba(201,164,87,.12); }
+
+/* 六爻 · 爻辞与小象（折叠） */
+.yaolist { display: flex; flex-direction: column; gap: 4px; }
+.yao2 { border: 1px solid transparent; border-radius: 4px; background: rgba(255,255,255,.014); }
+.yao2[open] { border-color: var(--line2); background: rgba(255,255,255,.03); }
+.yao2 summary {
+  display: grid; grid-template-columns: 40px 56px 1fr; gap: 10px; align-items: center;
+  padding: 9px 8px; cursor: pointer; list-style: none; outline: none;
+}
+.yao2 summary::-webkit-details-marker { display: none; }
+.yao2 .ylab { font-size: 12px; color: var(--gold); letter-spacing: 1px; }
+.yao2 .yci { font-size: 12px; color: #b3a894; line-height: 1.7; letter-spacing: .3px; }
+.yao2[open] .yci { color: var(--ink); }
+.myao.both {
+  width: 52px; height: 6px; background: repeating-linear-gradient(90deg, var(--gold) 0 7px, transparent 7px 12px);
+}
+.ybody { padding: 2px 12px 12px 14px; border-top: 1px dashed var(--line); }
+.ybody p { margin: 8px 0; font-size: 13px; line-height: 1.95; color: #cfc5b1; }
+.ybody .tag {
+  display: inline-block; min-width: 34px; color: var(--gold); font-size: 11px;
+  letter-spacing: 1px; margin-right: 6px;
+}
+.ybody .xiao { color: var(--gold2); letter-spacing: .5px; }
+.ybody .bai { color: var(--ink); font-size: 13.5px; }
+.ybody .wei { color: #8d8168; font-size: 11.5px; }
+.ybody .go {
+  display: inline-block; margin-top: 6px; font-size: 11px; color: var(--gold2);
+  text-decoration: none; border: 1px solid var(--line2); padding: 4px 9px; border-radius: 3px;
+}

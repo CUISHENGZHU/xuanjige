@@ -295,22 +295,41 @@
       '<p><span class="lab">占事</span>' + el(taka[1]) + '</p>' +
       '<p><span class="lab">要爻</span>' + el(taka[2]) + '</p></div>';
 
-    // 六爻位
-    h += '<div class="dcard"><h4>六爻 · 位与应</h4><p class="hint">初爻在下。点任一爻，看它变出的卦。</p><div class="yaorows">';
+    // 六爻 · 爻辞 / 小象 / 白话
+    var GY = (window.GuaYao || {})[name] || {};
+    var BB = (window.YaoBai || {})[name] || [];
     var TONEC = { '吉': 'ji', '偏吉': 'pj', '平': 'ping', '偏凶': 'px', '凶': 'xiong' };
+    h += '<div class="dcard"><h4>六爻 · 爻辞与小象</h4>' +
+      '<p class="hint">初爻在下。点开一爻，看爻辞、小象与白话；末行可跳到它变出的卦。轻重看爻辞与小象，不看位次——位置只说明处境，不决定吉凶。</p><div class="yaolist">';
     for (var i = 6; i >= 1; i--) {
       var y = Y.yaoWei(b, i);
       var yang = b[i - 1];
-      var label = i === 1 ? '初' + (yang ? '九' : '六')
-        : i === 6 ? '上' + (yang ? '九' : '六')
-        : (yang ? '九' : '六') + ['', '二', '三', '四', '五'][i - 1];
       var bianName = nameOf(b.map(function (v, k) { return k === i - 1 ? (v ? 0 : 1) : v; }));
-      h += '<a class="yrow" href="#/g/' + encodeURIComponent(bianName) + '">' +
-        '<span class="ylab">' + label + '</span>' +
+      var pair = (GY.yao && GY.yao[i - 1]) || ['', ''];
+      var xiao = (GY.xiao && GY.xiao[i - 1]) || '';
+      var bai = BB[i - 1] || '';
+      h += '<details class="yao2">' +
+        '<summary><span class="ylab">' + el(pair[0]) + '</span>' +
         '<span class="myao' + (yang ? '' : ' yin') + '"></span>' +
-        '<span class="ytone ' + (TONEC[y.tone] || 'ping') + '">' + y.tone + '</span>' +
-        '<span class="ytext">' + el(y.text) + '</span>' +
-        '<span class="ybian">变 → ' + short(bianName) + '</span></a>';
+        '<span class="yci">' + el(pair[1]) + '</span></summary>' +
+        '<div class="ybody">' +
+        '<p class="xiao"><span class="tag">象曰</span>' + el(xiao) + '</p>' +
+        '<p class="bai"><span class="tag">白话</span>' + el(bai) + '</p>' +
+        '<p class="wei"><span class="tag">爻位</span>' + el(y.text) + '</p>' +
+        '<a class="go" href="#/g/' + encodeURIComponent(bianName) + '">这一爻动 → ' + el(bianName) + '</a>' +
+        '</div></details>';
+    }
+    if (GY.yong) {
+      var yongBai = name === '乾为天' ? '六条龙都不争着当首领，反而吉——刚而能柔，是最难的刚。'
+        : '永远守正才有利——柔而能久，坤道的收尾。';
+      h += '<details class="yao2 yong"><summary><span class="ylab">' + el(GY.yong[0]) + '</span>' +
+        '<span class="myao both"></span>' +
+        '<span class="yci">' + el(GY.yong[1]) + '</span></summary>' +
+        '<div class="ybody"><p class="xiao"><span class="tag">象曰</span>' + el(GY.yong[2]) + '</p>' +
+        '<p class="bai"><span class="tag">白话</span>' + yongBai + '</p>' +
+        '<p class="wei"><span class="tag">说明</span>六爻全用，是乾坤两卦独有的「用九」「用六」。' +
+        (name === '乾为天' ? '阳不可为首：都刚，就不能谁都想当第一个。' : '阴不可无终：柔顺要一直守到底才算数。') +
+        '</p></div></details>';
     }
     h += '</div></div>';
 
